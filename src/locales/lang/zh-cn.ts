@@ -948,6 +948,17 @@ export default {
   "alchemy": "炼金",
   "enhancing": "强化",
 
+  "Experience": "经验",
+  "Gathering Quantity": "采集数量",
+  "Production Efficiency": "生产效率",
+  "Enhancing Speed": "强化速度",
+  "Action Speed": "行动速度",
+  "Efficiency": "效率",
+  "Gathering": "采集",
+  "Processing": "加工",
+  "Rare Find": "稀有发现",
+  "Wisdom": "经验",
+
   "计算完成，耗时{0}秒": "计算完成，耗时{0}秒",
   "获取数据第{0}次失败，正在重试...": "获取数据第{0}次失败，正在重试...",
   "已于{0}更新最新数据": "已于{0}更新最新数据",

@@ -8,6 +8,7 @@ import { getCommunityBuffDetailOf, getPersonalBuffDetailOf } from "@/common/apis
 import { getEquipmentListOf, getSpecialEquipmentListOf, getTeaListOf, getToolListOf, setActionConfigApi } from "@/common/apis/player"
 import { useTheme } from "@/common/composables/useTheme"
 import { DEFAULT_COMMUNITY_BUFF_LIST, DEFAULT_PERSONAL_BUFF_LIST, DEFAULT_SEPCIAL_EQUIPMENT_LIST } from "@/common/config"
+import { getTrans } from "@/locales"
 import { ACTION_LIST } from "@/pinia/stores/game"
 import { defaultActionConfig, usePlayerStore } from "@/pinia/stores/player"
 
@@ -452,13 +453,13 @@ function onExport() {
                 </div>
               </template>
               <el-table :data="communityBuffList.filter(item => communityBuffs ? communityBuffs.includes(item.type) : true)">
-                <el-table-column prop="type" :label="t('Buff')" width="120">
+                <el-table-column prop="type" :label="t('Buff')" min-width="180">
                   <template #default="{ row }">
-                    <div class="community-buff">
-                      <ItemIcon :hrid="getCommunityBuffDetailOf(row.hrid).buff.typeHrid" :width="22" :height="22" />
-                      <!-- <div v-if="row.level > 0" class="community-level">
-                    Lv.{{ row.level }}
-                  </div> -->
+                    <div style="display: flex; align-items: center;">
+                      <div class="community-buff">
+                        <ItemIcon :hrid="getCommunityBuffDetailOf(row.hrid).buff.typeHrid" :width="22" :height="22" />
+                      </div>
+                      <span class="ml-2">{{ getTrans(getCommunityBuffDetailOf(row.hrid).name) }}</span>
                     </div>
                   </template>
                 </el-table-column>
@@ -478,10 +479,13 @@ function onExport() {
                 </div>
               </template>
               <el-table :data="personalBuffList.filter(item => personalBuffs ? personalBuffs.includes(item.type) : true)">
-                <el-table-column prop="type" :label="t('Buff')" width="120">
+                <el-table-column prop="type" :label="t('Buff')" min-width="180">
                   <template #default="{ row }">
-                    <div class="community-buff" style="border-color: #2f86c4;">
-                      <ItemIcon :hrid="getPersonalBuffDetailOf(row.hrid).buff.typeHrid" :width="22" :height="22" />
+                    <div style="display: flex; align-items: center;">
+                      <div class="community-buff" style="border-color: #2f86c4;">
+                        <ItemIcon :hrid="getPersonalBuffDetailOf(row.hrid).buff.typeHrid" :width="22" :height="22" />
+                      </div>
+                      <span class="ml-2">{{ getTrans(getPersonalBuffDetailOf(row.hrid).name) }}</span>
                     </div>
                   </template>
                 </el-table-column>
