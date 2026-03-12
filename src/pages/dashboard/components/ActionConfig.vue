@@ -491,7 +491,7 @@ function onExport() {
                 </el-table-column>
                 <el-table-column :label="t('等级')">
                   <template #default="{ row }">
-                    <el-input-number v-model="row.level" :min="0" :max="20" style="width: 60px" :controls="false" />
+                    <el-input-number v-model="row.level" :min="0" :max="1" style="width: 60px" :controls="false" />
                   </template>
                 </el-table-column>
               </el-table>
