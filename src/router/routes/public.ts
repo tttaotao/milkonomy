@@ -87,107 +87,107 @@ export const publicRoutes: RouteRecordRaw[] = [
         }
       }
     ]
-  },
-  {
-    path: "/",
-    component: Layouts,
-    redirect: "/valhalla",
-    children: [
-      {
-        path: "valhalla",
-        component: () => import("@/pages/valhalla/index.vue"),
-        name: "Valhalla",
-        meta: {
-          title: t("英灵殿"),
-          elIcon: "User",
-          affix: false
-        }
-      }
-    ]
-  },
-  {
-    path: "/",
-    component: Layouts,
-    redirect: "/burial",
-    children: [
-      {
-        path: "burial",
-        component: () => import("@/pages/burial/index.vue"),
-        name: "Burial",
-        meta: {
-          title: t("埋骨地"),
-          elIcon: "User",
-          affix: false
-        }
-      }
-    ]
-  },
-  {
-    path: "/",
-    component: Layouts,
-    redirect: "/sponsor",
-    children: [
-      {
-        path: "sponsor",
-        component: () => import("@/pages/sponsor/index.vue"),
-        name: "Sponsor",
-        meta: {
-          title: t("打赏"),
-          elIcon: "Coin",
-          affix: true
-        }
-      }
-    ]
-  },
-
-  {
-    path: "/link",
-    meta: {
-      title: t("相关链接"),
-      elIcon: "Link"
-    },
-    children: [
-      {
-        path: "https://github.com/luyh7/milkonomy",
-        component: () => {},
-        name: "Link0",
-        meta: {
-          title: "Milkonomy Source Code"
-        }
-      },
-      {
-        path: "https://www.milkywayidle.com/",
-        component: () => {},
-        name: "Link1",
-        meta: {
-          title: "Milky Way Idle"
-        }
-      },
-      {
-        path: "https://test-ctmd6jnzo6t9.feishu.cn/docx/KG9ddER6Eo2uPoxJFkicsvbEnCe",
-        component: () => {},
-        name: "Link2",
-        meta: {
-          title: "牛牛手册(攻略/插件)"
-        }
-      },
-      {
-        path: "https://github.com/holychikenz/MWIApi",
-        component: () => {},
-        name: "Link3",
-        meta: {
-          title: "MWI Api"
-        }
-      },
-      {
-        path: "https://docs.google.com/spreadsheets/d/13yBy3oQkH5N4y7UJ0Pkux2A8O5xM1ZsVTNAg6qgLEcM/edit?gid=2017655058#gid=2017655058",
-        component: () => {},
-        name: "Link4",
-        meta: {
-          title: "MWI Data"
-        }
-      }
-
-    ]
   }
+//  {
+//    path: "/",
+//    component: Layouts,
+//    redirect: "/valhalla",
+//    children: [
+//      {
+//        path: "valhalla",
+//        component: () => import("@/pages/valhalla/index.vue"),
+//        name: "Valhalla",
+//        meta: {
+//          title: t("英灵殿"),
+//          elIcon: "User",
+//          affix: false
+//        }
+//      }
+//    ]
+//  },
+//  {
+//    path: "/",
+//    component: Layouts,
+//    redirect: "/burial",
+//    children: [
+//      {
+//        path: "burial",
+//        component: () => import("@/pages/burial/index.vue"),
+//        name: "Burial",
+//        meta: {
+//          title: t("埋骨地"),
+//          elIcon: "User",
+//          affix: false
+//        }
+//      }
+//    ]
+//  },
+//  {
+//    path: "/",
+//    component: Layouts,
+//    redirect: "/sponsor",
+//    children: [
+//      {
+//        path: "sponsor",
+//        component: () => import("@/pages/sponsor/index.vue"),
+//        name: "Sponsor",
+//        meta: {
+//          title: t("打赏"),
+//          elIcon: "Coin",
+//          affix: true
+//        }
+//      }
+//    ]
+//  },
+//
+//  {
+//    path: "/link",
+//    meta: {
+//      title: t("相关链接"),
+//      elIcon: "Link"
+//    },
+//    children: [
+//      {
+//        path: "https://github.com/luyh7/milkonomy",
+//        component: () => {},
+//        name: "Link0",
+//        meta: {
+//          title: "Milkonomy Source Code"
+//        }
+//      },
+//      {
+//        path: "https://www.milkywayidle.com/",
+//        component: () => {},
+//        name: "Link1",
+//        meta: {
+//          title: "Milky Way Idle"
+//        }
+//      },
+//      {
+//        path: "https://test-ctmd6jnzo6t9.feishu.cn/docx/KG9ddER6Eo2uPoxJFkicsvbEnCe",
+//        component: () => {},
+//        name: "Link2",
+//        meta: {
+//          title: "牛牛手册(攻略/插件)"
+//        }
+//      },
+//      {
+//        path: "https://github.com/holychikenz/MWIApi",
+//        component: () => {},
+//        name: "Link3",
+//        meta: {
+//          title: "MWI Api"
+//        }
+//      },
+//      {
+//        path: "https://docs.google.com/spreadsheets/d/13yBy3oQkH5N4y7UJ0Pkux2A8O5xM1ZsVTNAg6qgLEcM/edit?gid=2017655058#gid=2017655058",
+//        component: () => {},
+//        name: "Link4",
+//        meta: {
+//          title: "MWI Data"
+//        }
+//      }
+//
+//    ]
+//  }
 ]
