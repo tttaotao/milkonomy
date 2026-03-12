@@ -760,6 +760,7 @@ export default {
   "Action Speed": "行动速度",
   "Efficiency": "效率",
   "Gathering": "采集",
+  "Gourmet": "美食",
   "Processing": "加工",
   "Rare Find": "稀有发现",
   "Wisdom": "经验",

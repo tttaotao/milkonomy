@@ -36,6 +36,7 @@ export const DEFAULT_PERSONAL_BUFF_LIST: PersonalBuffItem[] = [
   { type: "action_speed", hrid: "/personal_buff_types/action_speed", level: undefined },
   { type: "efficiency", hrid: "/personal_buff_types/efficiency", level: undefined },
   { type: "gathering", hrid: "/personal_buff_types/gathering", level: undefined },
+  { type: "gourmet", hrid: "/personal_buff_types/gourmet", level: undefined },
   { type: "processing", hrid: "/personal_buff_types/processing", level: undefined },
   { type: "rare_find", hrid: "/personal_buff_types/rare_find", level: undefined },
   { type: "wisdom", hrid: "/personal_buff_types/wisdom", level: undefined }

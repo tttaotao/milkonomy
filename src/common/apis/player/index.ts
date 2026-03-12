@@ -236,6 +236,9 @@ function initBuffMap() {
         if (buff.typeHrid === "/buff_types/gathering") {
           buffs[`${action}Gathering`] = (buffs[`${action}Gathering`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
         }
+        if (buff.typeHrid === "/buff_types/gourmet") {
+          buffs[`${action}Gourmet`] = (buffs[`${action}Gourmet`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
+        }
         if (buff.typeHrid === "/buff_types/processing") {
           buffs[`${action}Processing`] = (buffs[`${action}Processing`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
         }

@@ -55,6 +55,7 @@ export const PERSONAL_BUFF_LIST = [
   "action_speed",
   "efficiency",
   "gathering",
+  "gourmet",
   "processing",
   "rare_find",
   "wisdom"
