@@ -51,6 +51,14 @@ export const COMMUNITY_BUFF_LIST = [
   "enhancing_speed"
 ]
 
+export const PERSONAL_BUFF_LIST = [
+  "action_speed",
+  "efficiency",
+  "gathering",
+  "processing",
+  "rare_find",
+  "wisdom"
+]
 const DEFAULT_HOUSE = {
   Efficiency: 0.015,
   Experience: 0.0005,

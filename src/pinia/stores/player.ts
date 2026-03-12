@@ -1,7 +1,7 @@
-import type { Action, CommunityBuff, Equipment } from "~/game"
+import type { Action, CommunityBuff, Equipment, PersonalBuff } from "~/game"
 import { defineStore } from "pinia"
 import { clearEnhancelateCache } from "@/common/apis/game"
-import { DEFAULT_COMMUNITY_BUFF_LIST, DEFAULT_SEPCIAL_EQUIPMENT_LIST, DEFAULT_TEA } from "@/common/config"
+import { DEFAULT_COMMUNITY_BUFF_LIST, DEFAULT_PERSONAL_BUFF_LIST, DEFAULT_SEPCIAL_EQUIPMENT_LIST, DEFAULT_TEA } from "@/common/config"
 import { pinia } from "@/pinia"
 import { ACTION_LIST, useGameStoreOutside } from "./game"
 
@@ -112,10 +112,19 @@ export function defaultActionConfig(name: string, color: string) {
       level: buff.level
     })
   }
+  const personalBuffMap = new Map<PersonalBuff, PersonalBuffItem>()
+  for (const buff of Object.values(DEFAULT_PERSONAL_BUFF_LIST)) {
+    personalBuffMap.set(buff.type, {
+      type: buff.type,
+      hrid: buff.hrid,
+      level: buff.level
+    })
+  }
   return {
     actionConfigMap,
     specialEquimentMap,
     communityBuffMap,
+    personalBuffMap,
     name,
     color
   }
@@ -144,12 +153,20 @@ export interface CommunityBuffItem {
   hrid?: string
   level?: number
 }
+
+export interface PersonalBuffItem {
+  type: PersonalBuff
+  hrid?: string
+  level?: number
+}
+
 export interface ActionConfig {
   name?: string
   color?: string
   actionConfigMap: Map<Action, ActionConfigItem>
   specialEquimentMap: Map<Equipment, PlayerEquipmentItem>
   communityBuffMap: Map<CommunityBuff, CommunityBuffItem>
+  personalBuffMap: Map<PersonalBuff, PersonalBuffItem>
 }
 
 // 向前兼容
@@ -158,6 +175,7 @@ function loadLegacyConfig() {
     actionConfigMap: new Map<Action, ActionConfigItem>(),
     specialEquimentMap: new Map<Equipment, PlayerEquipmentItem>(),
     communityBuffMap: new Map<CommunityBuff, CommunityBuffItem>(),
+    personalBuffMap: new Map<PersonalBuff, PersonalBuffItem>(),
     name: "0",
     color: "#11BF11"
   }
@@ -166,6 +184,7 @@ function loadLegacyConfig() {
     config.actionConfigMap = new Map<Action, ActionConfigItem>(Object.entries(data.actionConfigMap || {}) as [Action, ActionConfigItem][])
     config.specialEquimentMap = new Map<Equipment, PlayerEquipmentItem>(Object.entries(data.specialEquimentMap || {}) as [Equipment, PlayerEquipmentItem][])
     config.communityBuffMap = new Map<CommunityBuff, CommunityBuffItem>(Object.entries(data.communityBuffMap || {}) as [CommunityBuff, CommunityBuffItem][])
+    config.personalBuffMap = new Map<PersonalBuff, PersonalBuffItem>(Object.entries(data.personalBuffMap || {}) as [PersonalBuff, PersonalBuffItem][])
   } catch {
   }
   return config
@@ -187,7 +206,8 @@ function loadPresets(): ActionConfig[] {
         color: item.color,
         actionConfigMap: new Map<Action, ActionConfigItem>(Object.entries(item.actionConfigMap || {}) as [Action, ActionConfigItem][]),
         specialEquimentMap: new Map<Equipment, PlayerEquipmentItem>(Object.entries(item.specialEquimentMap || {}) as [Equipment, PlayerEquipmentItem][]),
-        communityBuffMap: new Map<CommunityBuff, CommunityBuffItem>(Object.entries(item.communityBuffMap || {}) as [CommunityBuff, CommunityBuffItem][])
+        communityBuffMap: new Map<CommunityBuff, CommunityBuffItem>(Object.entries(item.communityBuffMap || {}) as [CommunityBuff, CommunityBuffItem][]),
+        personalBuffMap: new Map<PersonalBuff, PersonalBuffItem>(Object.entries(item.personalBuffMap || {}) as [PersonalBuff, PersonalBuffItem][])
       }
       presets.push(actionConfig)
     }

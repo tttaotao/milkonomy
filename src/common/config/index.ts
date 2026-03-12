@@ -1,4 +1,4 @@
-import type { CommunityBuffItem, PlayerEquipmentItem } from "@/pinia/stores/player"
+import type { CommunityBuffItem, PersonalBuffItem, PlayerEquipmentItem } from "@/pinia/stores/player"
 import type { Action } from "~/game"
 
 export const DEFAULT_SEPCIAL_EQUIPMENT_LIST: PlayerEquipmentItem[] = [
@@ -30,4 +30,13 @@ export const DEFAULT_COMMUNITY_BUFF_LIST: CommunityBuffItem[] = [
   { type: "gathering_quantity", hrid: "/community_buff_types/gathering_quantity", level: undefined },
   { type: "production_efficiency", hrid: "/community_buff_types/production_efficiency", level: undefined },
   { type: "enhancing_speed", hrid: "/community_buff_types/enhancing_speed", level: undefined }
+]
+
+export const DEFAULT_PERSONAL_BUFF_LIST: PersonalBuffItem[] = [
+  { type: "action_speed", hrid: "/personal_buff_types/action_speed", level: undefined },
+  { type: "efficiency", hrid: "/personal_buff_types/efficiency", level: undefined },
+  { type: "gathering", hrid: "/personal_buff_types/gathering", level: undefined },
+  { type: "processing", hrid: "/personal_buff_types/processing", level: undefined },
+  { type: "rare_find", hrid: "/personal_buff_types/rare_find", level: undefined },
+  { type: "wisdom", hrid: "/personal_buff_types/wisdom", level: undefined }
 ]

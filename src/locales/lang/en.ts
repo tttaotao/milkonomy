@@ -180,6 +180,7 @@ export default {
   "茶": "Tea",
 
   "社区Buff": "Community Buffs",
+  "个人Buff": "Personal Buffs",
 
   "简易模式": "Simple Mode",
   "成功率": "Success Rate",

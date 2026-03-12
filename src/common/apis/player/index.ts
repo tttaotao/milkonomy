@@ -1,11 +1,11 @@
 import type Calculator from "@/calculator"
 import type { ActionConfig, PlayerEquipmentItem } from "@/pinia/stores/player"
-import type { Action, CommunityBuff, Equipment, ItemDetail, NoncombatStatsKey, NoncombatStatsProp } from "~/game"
+import type { Action, CommunityBuff, Equipment, ItemDetail, NoncombatStatsKey, NoncombatStatsProp, PersonalBuff } from "~/game"
 import { DEFAULT_SEPCIAL_EQUIPMENT_LIST, DEFAULT_TEA } from "@/common/config"
 import { getEquipmentTypeOf, getKeyOf } from "@/common/utils/game"
-import { ACTION_LIST, COMMUNITY_BUFF_LIST, EQUIPMENT_LIST, HOUSE_MAP, useGameStoreOutside } from "@/pinia/stores/game"
+import { ACTION_LIST, COMMUNITY_BUFF_LIST, EQUIPMENT_LIST, HOUSE_MAP, PERSONAL_BUFF_LIST, useGameStoreOutside } from "@/pinia/stores/game"
 import { usePlayerStoreOutside } from "@/pinia/stores/player"
-import { getCommunityBuffDetailOf, getGameDataApi, getItemDetailOf, getPriceOf } from "../game"
+import { getCommunityBuffDetailOf, getGameDataApi, getItemDetailOf, getPersonalBuffDetailOf, getPriceOf } from "../game"
 
 /** 改 */
 export function setActionConfigApi(config: ActionConfig, index: number) {
@@ -153,6 +153,15 @@ export function getCommunityBuffOf(type: CommunityBuff) {
   return playerConfig.communityBuffMap.get(type) ?? defaultPlayerConfig.communityBuffMap.get(type)!
 }
 
+/**
+ * 获取用户设置的个人buff
+ * @param type
+ */
+
+export function getPersonalBuffOf(type: PersonalBuff) {
+  return playerConfig.personalBuffMap.get(type) ?? defaultPlayerConfig.personalBuffMap.get(type)!
+}
+
 // #endregion
 
 // #region 茶
@@ -205,6 +214,36 @@ function initBuffMap() {
         }
         if (buff.typeHrid === "/buff_types/efficiency") {
           buffs[`${action}Efficiency`] = (buffs[`${action}Efficiency`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (cb.level - 1))
+        }
+      }
+    }
+  }
+
+  // 个人buff
+  for (const personalBuff of PERSONAL_BUFF_LIST) {
+    const pb = getPersonalBuffOf(personalBuff)
+    if (pb && pb.hrid && pb.level) {
+      const detail = getPersonalBuffDetailOf(pb.hrid!)
+      const buff = detail.buff
+      for (const actionType in detail.usableInActionTypeMap) {
+        const action = getKeyOf(actionType) as Action
+        if (buff.typeHrid === "/buff_types/action_speed") {
+          buffs[`${action}Speed`] = (buffs[`${action}Speed`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
+        }
+        if (buff.typeHrid === "/buff_types/efficiency") {
+          buffs[`${action}Efficiency`] = (buffs[`${action}Efficiency`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
+        }
+        if (buff.typeHrid === "/buff_types/gathering") {
+          buffs[`${action}Gathering`] = (buffs[`${action}Gathering`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
+        }
+        if (buff.typeHrid === "/buff_types/processing") {
+          buffs[`${action}Processing`] = (buffs[`${action}Processing`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
+        }
+        if (buff.typeHrid === "/buff_types/rare_find") {
+          buffs[`${action}RareFind`] = (buffs[`${action}RareFind`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
+        }
+        if (buff.typeHrid === "/buff_types/wisdom") {
+          buffs[`${action}Experience`] = (buffs[`${action}Experience`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
         }
       }
     }

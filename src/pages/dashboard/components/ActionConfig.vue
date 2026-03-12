@@ -1,13 +1,13 @@
-<script setup lang="ts">
-import type { ActionConfig, ActionConfigItem, CommunityBuffItem, PlayerEquipmentItem } from "@/pinia/stores/player"
-import type { Action, CommunityBuff, Equipment } from "~/game"
+﻿<script setup lang="ts">
+import type { ActionConfig, ActionConfigItem, CommunityBuffItem, PersonalBuffItem, PlayerEquipmentItem } from "@/pinia/stores/player"
+import type { Action, CommunityBuff, Equipment, PersonalBuff } from "~/game"
 import ItemIcon from "@@/components/ItemIcon/index.vue"
 import { Plus } from "@element-plus/icons-vue"
 import { ElMessageBox } from "element-plus"
-import { getCommunityBuffDetailOf } from "@/common/apis/game"
+import { getCommunityBuffDetailOf, getPersonalBuffDetailOf } from "@/common/apis/game"
 import { getEquipmentListOf, getSpecialEquipmentListOf, getTeaListOf, getToolListOf, setActionConfigApi } from "@/common/apis/player"
 import { useTheme } from "@/common/composables/useTheme"
-import { DEFAULT_COMMUNITY_BUFF_LIST, DEFAULT_SEPCIAL_EQUIPMENT_LIST } from "@/common/config"
+import { DEFAULT_COMMUNITY_BUFF_LIST, DEFAULT_PERSONAL_BUFF_LIST, DEFAULT_SEPCIAL_EQUIPMENT_LIST } from "@/common/config"
 import { ACTION_LIST } from "@/pinia/stores/game"
 import { defaultActionConfig, usePlayerStore } from "@/pinia/stores/player"
 
@@ -15,12 +15,14 @@ defineProps<{
   actions?: Action[]
   equipments?: Equipment[]
   communityBuffs?: CommunityBuff[]
+  personalBuffs?: PersonalBuff[]
 }>()
 const playerStore = usePlayerStore()
 const visible = ref(false)
 const actionList = ref<ActionConfigItem[]>([])
 const specialList = ref<PlayerEquipmentItem[]>([])
 const communityBuffList = ref<CommunityBuffItem[]>([])
+const personalBuffList = ref<PersonalBuffItem[]>([])
 const name = ref("")
 const color = ref("")
 const currentIndex = ref(0)
@@ -53,6 +55,12 @@ function onDialog(config: ActionConfig, index: number) {
     }
   }))
 
+  personalBuffList.value = structuredClone(DEFAULT_PERSONAL_BUFF_LIST.map((buff) => {
+    return {
+      ...toRaw(config.personalBuffMap.get(buff.type) ?? defaultConfig.personalBuffMap.get(buff.type)!)
+    }
+  }))
+
   name.value = config.name!
   color.value = config.color!
   visible.value = true
@@ -78,6 +86,7 @@ function constructActionConfig() {
     actionConfigMap: new Map<Action, ActionConfigItem>(),
     specialEquimentMap: new Map<Equipment, PlayerEquipmentItem>(),
     communityBuffMap: new Map<CommunityBuff, CommunityBuffItem>(),
+    personalBuffMap: new Map<PersonalBuff, PersonalBuffItem>(),
     name: name.value,
     color: color.value
   }
@@ -92,6 +101,10 @@ function constructActionConfig() {
 
   for (const item of communityBuffList.value) {
     config.communityBuffMap.set(item.type, toRaw(item))
+  }
+
+  for (const item of personalBuffList.value) {
+    config.personalBuffMap.set(item.type, toRaw(item))
   }
 
   return config
@@ -177,7 +190,8 @@ function onImport() {
         color: obj.color,
         actionConfigMap: new Map<Action, ActionConfigItem>(Object.entries(obj.actionConfigMap) as [Action, ActionConfigItem][]),
         specialEquimentMap: new Map<Equipment, PlayerEquipmentItem>(Object.entries(obj.specialEquimentMap) as [Equipment, PlayerEquipmentItem][]),
-        communityBuffMap: new Map<CommunityBuff, CommunityBuffItem>(Object.entries(obj.communityBuffMap) as [CommunityBuff, CommunityBuffItem][])
+        communityBuffMap: new Map<CommunityBuff, CommunityBuffItem>(Object.entries(obj.communityBuffMap) as [CommunityBuff, CommunityBuffItem][]),
+        personalBuffMap: new Map<PersonalBuff, PersonalBuffItem>(Object.entries(obj.personalBuffMap) as [PersonalBuff, PersonalBuffItem][])
       }
       onDialog(config, playerStore.presets.length)
     } catch (e) {
@@ -197,7 +211,8 @@ function onExport() {
     color: config.color,
     actionConfigMap: Object.fromEntries(config.actionConfigMap.entries()),
     specialEquimentMap: Object.fromEntries(config.specialEquimentMap.entries()),
-    communityBuffMap: Object.fromEntries(config.communityBuffMap.entries())
+    communityBuffMap: Object.fromEntries(config.communityBuffMap.entries()),
+    personalBuffMap: Object.fromEntries(config.personalBuffMap.entries())
   })
   navigator.clipboard.writeText(json).then(() => {
     ElMessage.success(t("已复制到剪贴板"))
@@ -244,6 +259,15 @@ function onExport() {
         <ItemIcon :hrid="getCommunityBuffDetailOf(communityBuff.hrid!).buff.typeHrid" :width="22" :height="22" />
         <div v-if="communityBuff.level" class="community-level">
           Lv.{{ communityBuff.level }}
+        </div>
+      </div>
+    </template>
+
+    <template v-for="[key, personalBuff] in playerStore.config.personalBuffMap.entries()" :key="key">
+      <div v-if="personalBuff.level" class="community-buff ml-2" style="border-color: #2f86c4;">
+        <ItemIcon :hrid="getPersonalBuffDetailOf(personalBuff.hrid!).buff.typeHrid" :width="22" :height="22" />
+        <div v-if="personalBuff.level" class="community-level">
+          Lv.{{ personalBuff.level }}
         </div>
       </div>
     </template>
@@ -435,6 +459,29 @@ function onExport() {
                       <!-- <div v-if="row.level > 0" class="community-level">
                     Lv.{{ row.level }}
                   </div> -->
+                    </div>
+                  </template>
+                </el-table-column>
+                <el-table-column :label="t('等级')">
+                  <template #default="{ row }">
+                    <el-input-number v-model="row.level" :min="0" :max="20" style="width: 60px" :controls="false" />
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-card>
+          </el-col>
+          <el-col :xs="24" :sm="24" :md="10" :lg="12" :xl="24">
+            <el-card class="mt-5">
+              <template #header>
+                <div style="line-height: 32px;">
+                  {{ t('个人Buff') }}
+                </div>
+              </template>
+              <el-table :data="personalBuffList.filter(item => personalBuffs ? personalBuffs.includes(item.type) : true)">
+                <el-table-column prop="type" :label="t('Buff')" width="120">
+                  <template #default="{ row }">
+                    <div class="community-buff" style="border-color: #2f86c4;">
+                      <ItemIcon :hrid="getPersonalBuffDetailOf(row.hrid).buff.typeHrid" :width="22" :height="22" />
                     </div>
                   </template>
                 </el-table-column>
