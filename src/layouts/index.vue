@@ -45,7 +45,7 @@ watchEffect(() => {
 <template>
   <div class="layout-wrapper">
     <!-- 公告横幅 -->
-    <AnnouncementBanner />
+    <!-- <AnnouncementBanner /> -->
 
     <!-- 冻结期间横幅 -->
     <FreezeBanner v-if="isFrozen" />
