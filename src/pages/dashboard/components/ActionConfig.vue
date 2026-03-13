@@ -186,13 +186,15 @@ function onImport() {
       if (!obj.name || !obj.color || !obj.actionConfigMap || !obj.specialEquimentMap) {
         throw new Error(t("无效的预设配置"))
       }
+      const communityBuffMap = (obj.communityBuffMap && typeof obj.communityBuffMap === "object") ? obj.communityBuffMap : {}
+      const personalBuffMap = (obj.personalBuffMap && typeof obj.personalBuffMap === "object") ? obj.personalBuffMap : {}
       const config: ActionConfig = {
         name: obj.name,
         color: obj.color,
         actionConfigMap: new Map<Action, ActionConfigItem>(Object.entries(obj.actionConfigMap) as [Action, ActionConfigItem][]),
         specialEquimentMap: new Map<Equipment, PlayerEquipmentItem>(Object.entries(obj.specialEquimentMap) as [Equipment, PlayerEquipmentItem][]),
-        communityBuffMap: new Map<CommunityBuff, CommunityBuffItem>(Object.entries(obj.communityBuffMap) as [CommunityBuff, CommunityBuffItem][]),
-        personalBuffMap: new Map<PersonalBuff, PersonalBuffItem>(Object.entries(obj.personalBuffMap) as [PersonalBuff, PersonalBuffItem][])
+        communityBuffMap: new Map<CommunityBuff, CommunityBuffItem>(Object.entries(communityBuffMap) as [CommunityBuff, CommunityBuffItem][]),
+        personalBuffMap: new Map<PersonalBuff, PersonalBuffItem>(Object.entries(personalBuffMap) as [PersonalBuff, PersonalBuffItem][])
       }
       onDialog(config, playerStore.presets.length)
     } catch (e) {
