@@ -101,9 +101,45 @@ export const PRICE_STATUS_LIST = [
   { value: PriceStatus.BID_HIGH, label: `${getTrans("右价")}+` }
 ]
 
+// 数据替换
+function applyGameDataOverrides(value: GameData | null) {
+  if (!value) {
+    return value
+  }
+  let target = value.personalBuffTypeDetailMap?.["/personal_buff_types/action_speed"]?.buff
+  if (target) {
+    target.typeHrid = "/items/seal_of_action_speed"
+  }
+  target = value.personalBuffTypeDetailMap?.["/personal_buff_types/efficiency"]?.buff
+  if (target) {
+    target.typeHrid = "/items/seal_of_efficiency"
+  }
+  target = value.personalBuffTypeDetailMap?.["/personal_buff_types/gathering"]?.buff
+  if (target) {
+    target.typeHrid = "/items/seal_of_gathering"
+  }
+  target = value.personalBuffTypeDetailMap?.["/personal_buff_types/gourmet"]?.buff
+  if (target) {
+    target.typeHrid = "/items/seal_of_gourmet"
+  }
+  target = value.personalBuffTypeDetailMap?.["/personal_buff_types/processing"]?.buff
+  if (target) {
+    target.typeHrid = "/items/seal_of_processing"
+  }
+  target = value.personalBuffTypeDetailMap?.["/personal_buff_types/rare_find"]?.buff
+  if (target) {
+    target.typeHrid = "/items/seal_of_rare_find"
+  }
+  target = value.personalBuffTypeDetailMap?.["/personal_buff_types/wisdom"]?.buff
+  if (target) {
+    target.typeHrid = "/items/seal_of_wisdom"
+  }
+  return value
+}
+
 export const useGameStore = defineStore("game", {
   state: () => ({
-    gameData: getGameData(),
+    gameData: applyGameDataOverrides(getGameData()),
     marketData: getMarketData(),
     leaderboardCache: {} as { [time: number]: Calculator[] },
     enhanposerCache: {} as { [time: number]: WorkflowCalculator[] },
@@ -155,7 +191,7 @@ export const useGameStore = defineStore("game", {
       if (!response[0].ok || !response[1].ok) {
         throw new Error("Response not ok")
       }
-      const newGameData = await response[0].json()
+      const newGameData = applyGameDataOverrides(await response[0].json() as GameData)
       const newMarketData = await response[1].json()
       // 如果有缓存数据，则不更新gameData，防止国际化数据被覆
       if (!this.gameData) {
@@ -341,7 +377,7 @@ function setMarketData(value: MarketData) {
 }
 
 function getGameData() {
-  return JSON.parse(localStorage.getItem(`${KEY_PREFIX}game-data`) || "null") as GameData | null
+  return applyGameDataOverrides(JSON.parse(localStorage.getItem(`${KEY_PREFIX}game-data`) || "null") as GameData | null)
 }
 function setGameData(value: GameData) {
   localStorage.setItem(`${KEY_PREFIX}game-data`, JSON.stringify(value))

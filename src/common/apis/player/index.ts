@@ -227,25 +227,25 @@ function initBuffMap() {
       const buff = detail.buff
       for (const actionType in detail.usableInActionTypeMap) {
         const action = getKeyOf(actionType) as Action
-        if (buff.typeHrid === "/buff_types/action_speed") {
+        if (buff.typeHrid === "/items/seal_of_action_speed") {
           buffs[`${action}Speed`] = (buffs[`${action}Speed`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
         }
-        if (buff.typeHrid === "/buff_types/efficiency") {
+        if (buff.typeHrid === "/items/seal_of_efficiency") {
           buffs[`${action}Efficiency`] = (buffs[`${action}Efficiency`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
         }
-        if (buff.typeHrid === "/buff_types/gathering") {
+        if (buff.typeHrid === "/items/seal_of_gathering") {
           buffs[`${action}Gathering`] = (buffs[`${action}Gathering`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
         }
-        if (buff.typeHrid === "/buff_types/gourmet") {
+        if (buff.typeHrid === "/items/seal_of_gourmet") {
           buffs[`${action}Gourmet`] = (buffs[`${action}Gourmet`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
         }
-        if (buff.typeHrid === "/buff_types/processing") {
+        if (buff.typeHrid === "/items/seal_of_processing") {
           buffs[`${action}Processing`] = (buffs[`${action}Processing`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
         }
-        if (buff.typeHrid === "/buff_types/rare_find") {
+        if (buff.typeHrid === "/items/seal_of_rare_find") {
           buffs[`${action}RareFind`] = (buffs[`${action}RareFind`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
         }
-        if (buff.typeHrid === "/buff_types/wisdom") {
+        if (buff.typeHrid === "/items/seal_of_wisdom") {
           buffs[`${action}Experience`] = (buffs[`${action}Experience`] || 0) + (buff.flatBoost + buff.flatBoostLevelBonus * (pb.level - 1))
         }
       }
