@@ -30,7 +30,7 @@ const currentIndex = ref(0)
 function onDialog(config: ActionConfig, index: number) {
   const defaultConfig = defaultActionConfig("", "")
   actionList.value = structuredClone(ACTION_LIST.map((action) => {
-    const map = config.actionConfigMap.get(action) ?? defaultConfig.actionConfigMap.get(action)!
+    const map = config.actionConfigMap?.get(action) ?? defaultConfig.actionConfigMap.get(action)!
     // 如果当前配置没有某些字段，则使用默认配置的字段值
     const defaultMap = defaultConfig.actionConfigMap.get(action)!
     for (const key in defaultMap) {
@@ -46,19 +46,19 @@ function onDialog(config: ActionConfig, index: number) {
 
   specialList.value = structuredClone(DEFAULT_SEPCIAL_EQUIPMENT_LIST.map((item) => {
     return {
-      ...toRaw(config.specialEquimentMap.get(item.type) ?? defaultConfig.specialEquimentMap.get(item.type)!)
+      ...toRaw(config.specialEquimentMap?.get(item.type) ?? defaultConfig.specialEquimentMap.get(item.type)!)
     }
   }))
 
   communityBuffList.value = structuredClone(DEFAULT_COMMUNITY_BUFF_LIST.map((buff) => {
     return {
-      ...toRaw(config.communityBuffMap.get(buff.type) ?? defaultConfig.communityBuffMap.get(buff.type)!)
+      ...toRaw(config.communityBuffMap?.get(buff.type) ?? defaultConfig.communityBuffMap.get(buff.type)!)
     }
   }))
 
   personalBuffList.value = structuredClone(DEFAULT_PERSONAL_BUFF_LIST.map((buff) => {
     return {
-      ...toRaw(config.personalBuffMap.get(buff.type) ?? defaultConfig.personalBuffMap.get(buff.type)!)
+      ...toRaw(config.personalBuffMap?.get(buff.type) ?? defaultConfig.personalBuffMap.get(buff.type)!)
     }
   }))
 
