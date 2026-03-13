@@ -106,34 +106,23 @@ function applyGameDataOverrides(value: GameData | null) {
   if (!value) {
     return value
   }
-  let target = value.personalBuffTypeDetailMap?.["/personal_buff_types/action_speed"]?.buff
-  if (target) {
-    target.typeHrid = "/items/seal_of_action_speed"
+
+  const sealMap: Record<string, string> = {
+    "/personal_buff_types/action_speed": "/items/seal_of_action_speed",
+    "/personal_buff_types/efficiency": "/items/seal_of_efficiency",
+    "/personal_buff_types/gathering": "/items/seal_of_gathering",
+    "/personal_buff_types/gourmet": "/items/seal_of_gourmet",
+    "/personal_buff_types/processing": "/items/seal_of_processing",
+    "/personal_buff_types/rare_find": "/items/seal_of_rare_find",
+    "/personal_buff_types/wisdom": "/items/seal_of_wisdom"
   }
-  target = value.personalBuffTypeDetailMap?.["/personal_buff_types/efficiency"]?.buff
-  if (target) {
-    target.typeHrid = "/items/seal_of_efficiency"
+  for (const [buffType, itemHrid] of Object.entries(sealMap)) {
+    const target = value.personalBuffTypeDetailMap?.[buffType]?.buff
+    if (target) {
+      target.typeHrid = itemHrid
+    }
   }
-  target = value.personalBuffTypeDetailMap?.["/personal_buff_types/gathering"]?.buff
-  if (target) {
-    target.typeHrid = "/items/seal_of_gathering"
-  }
-  target = value.personalBuffTypeDetailMap?.["/personal_buff_types/gourmet"]?.buff
-  if (target) {
-    target.typeHrid = "/items/seal_of_gourmet"
-  }
-  target = value.personalBuffTypeDetailMap?.["/personal_buff_types/processing"]?.buff
-  if (target) {
-    target.typeHrid = "/items/seal_of_processing"
-  }
-  target = value.personalBuffTypeDetailMap?.["/personal_buff_types/rare_find"]?.buff
-  if (target) {
-    target.typeHrid = "/items/seal_of_rare_find"
-  }
-  target = value.personalBuffTypeDetailMap?.["/personal_buff_types/wisdom"]?.buff
-  if (target) {
-    target.typeHrid = "/items/seal_of_wisdom"
-  }
+
   return value
 }
 
