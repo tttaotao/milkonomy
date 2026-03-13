@@ -102,11 +102,7 @@ export const PRICE_STATUS_LIST = [
 ]
 
 // 数据替换
-function applyGameDataOverrides(value: GameData | null) {
-  if (!value) {
-    return value
-  }
-
+function applyGameDataOverrides(value: GameData) {
   const sealMap: Record<string, string> = {
     "/personal_buff_types/action_speed": "/items/seal_of_action_speed",
     "/personal_buff_types/efficiency": "/items/seal_of_efficiency",
@@ -366,7 +362,7 @@ function setMarketData(value: MarketData) {
 }
 
 function getGameData() {
-  return applyGameDataOverrides(JSON.parse(localStorage.getItem(`${KEY_PREFIX}game-data`) || "null") as GameData | null)
+  return applyGameDataOverrides(JSON.parse(localStorage.getItem(`${KEY_PREFIX}game-data`) || "{}") as GameData)
 }
 function setGameData(value: GameData) {
   localStorage.setItem(`${KEY_PREFIX}game-data`, JSON.stringify(value))
