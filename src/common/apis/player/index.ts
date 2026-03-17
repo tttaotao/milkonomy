@@ -75,6 +75,11 @@ function initDefaultActionConfigMap() {
         hrid: undefined,
         enhanceLevel: undefined
       },
+      back: {
+        type: `back`,
+        hrid: undefined,
+        enhanceLevel: undefined
+      },
       houseLevel: 4,
       tea: structuredClone(DEFAULT_TEA[action])
     })

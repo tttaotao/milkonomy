@@ -922,6 +922,14 @@ export default {
   "Basic Coffee Crate": "基础咖啡箱",
   "Advanced Coffee Crate": "进阶咖啡箱",
   "Expert Coffee Crate": "专家咖啡箱",
+  "Gatherer Cape": "采集者披风",
+  "Gatherer Cape (R)": "采集者披风（精）",
+  "Artificer Cape": "工匠披风",
+  "Artificer Cape (R)": "工匠披风（精）",
+  "Culinary Cape": "烹饪披风",
+  "Culinary Cape (R)": "烹饪披风（精）",
+  "Chance Cape": "机缘披风",
+  "Chance Cape (R)": "机缘披风（精）",
 
   // Equipment Slots
   "Tool": "工具",
@@ -936,6 +944,7 @@ export default {
   "Back": "背部",
   "Off Hand": "副手",
   "Pouch": "袋子",
+  "Cape": "披风",
 
   "milking": "挤奶",
   "foraging": "采摘",

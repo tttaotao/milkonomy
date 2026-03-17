@@ -399,6 +399,23 @@ function onExport() {
                 <el-input-number v-model="row.charm.enhanceLevel" :min="0" :max="20" style="width: 60px" :controls="false" />
               </template>
             </el-table-column>
+            <el-table-column :label="t('披风')" align="center" min-width="105">
+              <template #default="{ row }">
+                <el-select style="width:80px" v-model="row.back.hrid" :placeholder="t('无')" clearable>
+                  <el-option v-for="item in getEquipmentListOf(row.action, 'back').sort((a, b) => a.itemLevel - b.itemLevel)" :key="item.hrid" :label="item.name" :value="item.hrid">
+                    <div style="display:flex;align-items:center;gap:10px;">
+                      <ItemIcon :hrid="item.hrid" />
+                      <div> {{ item.name }} </div>
+                    </div>
+                  </el-option>
+                  <template #label>
+                    <ItemIcon style="margin-top: 4px;" :hrid="row.back.hrid" />
+                  </template>
+                </el-select>
+                &nbsp;+&nbsp;
+                <el-input-number v-model="row.back.enhanceLevel" :min="0" :max="20" style="width: 60px" :controls="false" />
+              </template>
+            </el-table-column>
             <el-table-column :label="t('茶')" align="center" min-width="155">
               <template #default="{ row }">
                 <el-checkbox-group v-model="row.tea" size="large" :max="3">

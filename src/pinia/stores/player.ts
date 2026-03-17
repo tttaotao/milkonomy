@@ -92,6 +92,11 @@ export function defaultActionConfig(name: string, color: string) {
         hrid: undefined,
         enhanceLevel: undefined
       },
+      back: {
+        type: `back`,
+        hrid: undefined,
+        enhanceLevel: undefined
+      },
       houseLevel: 4,
       tea: structuredClone(DEFAULT_TEA[action])
     })

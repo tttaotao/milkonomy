@@ -41,7 +41,8 @@ export const EQUIPMENT_LIST = [
   "off_hand",
   "pouch",
   // 'main_hand'
-  "charm"
+  "charm",
+  "back"
 ] as const
 
 export const COMMUNITY_BUFF_LIST = [

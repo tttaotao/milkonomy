@@ -171,6 +171,7 @@ export default {
   "副手": "Off Hand",
   "袋子": "Pouch",
   "护符": "Charm",
+  "披风": "Cape",
 
   "无": "None",
   "其他": "Others",
