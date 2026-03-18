@@ -144,6 +144,7 @@ export interface ActionConfigItem {
   body: PlayerEquipmentItem
   legs: PlayerEquipmentItem
   charm: PlayerEquipmentItem
+  back: PlayerEquipmentItem
   houseLevel: number
   tea: string[]
 }
