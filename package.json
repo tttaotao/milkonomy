@@ -1,7 +1,7 @@
 {
   "name": "@tttaotao/milkonomy",
   "type": "module",
-  "version": "2.0.3",
+  "version": "2.0.5",
   "description": "Community-maintained fork of milkonomy, built with Vue3, Vite, TypeScript, Element Plus, and more",
   "author": "luyh7 <470103427@qq.com> (https://github.com/luyh7)",
   "contributors": [

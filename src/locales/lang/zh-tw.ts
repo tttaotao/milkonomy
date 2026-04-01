@@ -727,6 +727,7 @@ export default {
   "Wooden Shield": "木盾",
   "Wooden Water Staff": "木制水法杖",
   "Yogurt": "酸奶",
+  "Philosopher's Mirror": "贤者之镜",
   "Pathbreaker Boots": "开路者靴",
   "Pathbreaker Boots (R)": "开路者靴（精）",
   "Pathfinder Boots": "探路者靴",
