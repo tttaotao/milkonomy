@@ -33,9 +33,9 @@ trackRouter(router)
 app.use(pinia).use(router)
 
 // 定时获取数据
-setInterval(() => {
-  useGameStoreOutside().tryFetchData()
-}, 300 * 1000)
+// setInterval(() => {
+//  useGameStoreOutside().tryFetchData()
+// }, 300 * 1000)
 
 app.use(VueGtag, {
   property: {
