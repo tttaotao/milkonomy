@@ -1,3 +1,5 @@
+import { max } from "lodash-es"
+
 export function number(value: number, decimal = 0) {
   // 如果value~(0,100),保留decimal位小数
   // 否则保留整数
@@ -36,6 +38,7 @@ export function costTime(value: number) {
   // return `${Math.floor(value / 10000000) / 100}s`
   let result = ""
   value /= 1000000000
+  value = Math.max(3, value)
   const h = Math.floor(value / 3600)
   const m = Math.floor(value % 3600 / 60)
   const decimal = h || m ? 0 : 2
