@@ -220,7 +220,7 @@ export default abstract class Calculator {
   _actionsPH?: number
   get actionsPH(): number {
     if (this._actionsPH === undefined) {
-      this._actionsPH = ((60 * 60 * 1000000000) / this.timeCost) * this.efficiency
+      this._actionsPH = ((60 * 60 * 1000000000) / Math.max(this.timeCost, 3000000000)) * this.efficiency
     }
     return this._actionsPH
   }
