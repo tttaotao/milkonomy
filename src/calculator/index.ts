@@ -202,7 +202,7 @@ export default abstract class Calculator {
       // 不逃逸时，等价于逃逸到初始装备
       return item.countPH! * item.price
     }
-    return item.countPH! * escape.price * 0.98
+    return item.countPH! * escape.price * 0.95
   }
 
   /**
@@ -211,10 +211,10 @@ export default abstract class Calculator {
    */
   get income(): number {
     const income = this.productListWithPrice.reduce((acc, product) => {
-      const coinRate = product.hrid === COIN_HRID ? 0.98 : 1
+      const coinRate = product.hrid === COIN_HRID ? 0.95 : 1
       return acc + product.count * (product.rate || 1) * product.price / coinRate
     }, 0)
-    return income * 0.98
+    return income * 0.95
   }
 
   _actionsPH?: number

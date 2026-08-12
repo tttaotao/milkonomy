@@ -229,8 +229,8 @@ const results = computed(() => {
     /**
      * tag = 0时，利用工时费计算指导价
         总成本 = 收入
-        材料费用 + 总工时费 + 1个初始物品成本 = (成功率*指导价 + 逃逸率*逃逸价格或白板价格) * 98%
-        因此 指导价 = (总成本 / 98% - 逃逸价格*逃逸率) / 成功率
+        材料费用 + 总工时费 + 1个初始物品成本 = (成功率*指导价 + 逃逸率*逃逸价格或白板价格) * 95%
+        因此 指导价 = (总成本 / 95% - 逃逸价格*逃逸率) / 成功率
      */
 
     const escapePrice = calc.realEscapeLevel === 0
@@ -242,13 +242,13 @@ const results = computed(() => {
           : currentItemEscapePrice.value)
 
     // 逃逸损耗
-    const fallingRate = (curentItemPrice - escapePrice * 0.98) / actions * calc.actionsPH
+    const fallingRate = (curentItemPrice - escapePrice * 0.95) / actions * calc.actionsPH
 
     /**
      * tag = 1时，利用指导价计算工时费
      *  总成本 = 收入
-        材料费用 + 总工时费 + 1个初始物品成本 = (成功率*指导价 + 逃逸率*逃逸价格或白板价格) * 98%
-        因此 总工时费 = (成功率*指导价 + 逃逸率*逃逸价格或白板价格) * 98% - 1个初始物品成本 - 材料费用
+        材料费用 + 总工时费 + 1个初始物品成本 = (成功率*指导价 + 逃逸率*逃逸价格或白板价格) * 95%
+        因此 总工时费 = (成功率*指导价 + 逃逸率*逃逸价格或白板价格) * 95% - 1个初始物品成本 - 材料费用
         每小时的工时费 = 总工时费  / actions * actionsPH
      */
 
@@ -261,10 +261,10 @@ const results = computed(() => {
       productPrice = currentDecomposePrice.value
     }
 
-    const hourlyCost = ((productPrice * (targetRate + leapRate) + escapePrice * escapeRate) * 0.98 - totalCostNoHourly) / actions * calc.actionsPH
+    const hourlyCost = ((productPrice * (targetRate + leapRate) + escapePrice * escapeRate) * 0.95 - totalCostNoHourly) / actions * calc.actionsPH
 
     // 单件利润
-    const profitPP = (productPrice * (targetRate + leapRate) + escapePrice * escapeRate) * 0.98 - totalCostNoHourly
+    const profitPP = (productPrice * (targetRate + leapRate) + escapePrice * escapeRate) * 0.95 - totalCostNoHourly
 
     const guidePrice = (totalCost - escapePrice * escapeRate) / (targetRate + leapRate)
     const seconds = actions / calc.actionsPH * 3600
@@ -709,7 +709,7 @@ watch(menuVisible, (value) => {
                 </div>
 
                 <el-tag class="w-100px " type="success" size="large">
-                  {{ currentDecomposePrice && Format.money(currentDecomposePrice * 0.98) }}
+                  {{ currentDecomposePrice && Format.money(currentDecomposePrice * 0.95) }}
                 </el-tag>
               </div>
             </el-tab-pane>
@@ -865,11 +865,11 @@ watch(menuVisible, (value) => {
                 <template #content>
                   总成本 = 材料费用 + 工时费 + 1个初始物品成本
                   <br>
-                  总收入 = (成功率*指导价 + 逃逸率*逃逸价格或白板价格) * 98%
+                  总收入 = (成功率*指导价 + 逃逸率*逃逸价格或白板价格) * 95%
                   <br>
                   总成本 = 总收入
                   <br>
-                  ∴ 指导价 = (总成本 / 98% - 逃逸率*逃逸价格或白板价格) / 成功率
+                  ∴ 指导价 = (总成本 / 95% - 逃逸率*逃逸价格或白板价格) / 成功率
                 </template>
                 <el-icon>
                   <Warning />

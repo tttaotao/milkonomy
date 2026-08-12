@@ -175,8 +175,8 @@ const results = computed(() => {
       ? currentItem.value.productPrice
       : getPriceOf(currentItem.value.hrid, enhanceLevel).bid
 
-    const hourlyCost = (productPrice * 0.98 - totalCostNoHourly) / actions * calc.actionsPH
-    const profitPP = productPrice * 0.98 - totalCostNoHourly
+    const hourlyCost = (productPrice * 0.95 - totalCostNoHourly) / actions * calc.actionsPH
+    const profitPP = productPrice * 0.95 - totalCostNoHourly
 
     const seconds = actions / calc.actionsPH * 3600
     result.push({
