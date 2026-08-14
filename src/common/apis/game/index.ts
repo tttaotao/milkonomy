@@ -98,11 +98,14 @@ function convertPriceOfStatus(price: MarketItemPrice, buyStatus: PriceStatus, se
 
 const priceStep = [
   [0, 1],
-  [50, 2],
-  [100, 5],
-  [300, 10]
+  // [50, 2],
+  // [100, 5],
+  // [300, 10]
   // [500,20],
   // [1000,50]
+  [500, 2],
+  [1000, 5],
+  [3000, 10]
   // ...
 ]
 /**
@@ -120,9 +123,9 @@ function priceStepOf(price: number, high: boolean = true) {
   if (price <= 0) {
     return -1
   }
-  // 先将price按十进制转为0~300的范围
+  // 先将price按十进制转为0~3000的范围
   let dec = 0
-  while (price > 300) {
+  while (price > 3000) {
     price /= 10
     dec += 1
   }
